@@ -1,0 +1,50 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // Editor
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.stablePeek": true,
+    "editor.rulers": [100],
+    "editor.tabSize": 2,
+    "editor.tabCompletion": "on",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+
+    // Workbench
+    "workbench.editor.focusRecentEditorAfterClose": false,
+    "workbench.editor.revealIfOpen": true,
+
+    // Search
+    "search.exclude": {
+      "public/**": true,
+      "**/node_modules": true
+    },
+
+    // Merge conflicts
+    "merge-conflict.autoNavigateNextConflict.enabled": false,
+    "merge-conflict.codeLens.enabled": true,
+    "merge-conflict.decorators.enabled": true,
+
+    // JavaScript
+    "javascript.suggest.completeFunctionCalls": true,
+    "javascript.suggest.completeJSDocs": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+
+    // TypeScript
+    "typescript.tsdk": "node_modules/typescript/lib",
+
+    // CSS
+    "css.lint.idSelector": "error",
+    "css.lint.important": "error",
+    "css.lint.propertyIgnoredDueToDisplay": "error",
+    "css.lint.universalSelector": "error",
+    "css.lint.unknownProperties": "error",
+    "css.lint.unknownVendorSpecificProperties": "error"
+  }
+}
