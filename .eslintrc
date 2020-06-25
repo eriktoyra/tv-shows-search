@@ -1,0 +1,90 @@
+{
+  "extends": [
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["react", "@typescript-eslint", "jest"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "import/extensions": [1, "never"],
+    "import/prefer-default-export": 0,
+    "jsx-quotes": [2, "prefer-double"],
+    "max-len": [1, { "code": 120 }],
+    "no-nested-ternary": 0,
+    "no-use-before-define": [2, { "functions": false, "classes": true }],
+    "no-unused-expressions": [2, { "allowTernary": true }],
+    "react/destructuring-assignment": [2, "always"],
+    "react/jsx-boolean-value": [2, "always"],
+    "react/jsx-no-bind": [
+      1,
+      {
+        "ignoreDOMComponents": false,
+        "ignoreRefs": false,
+        "allowArrowFunctions": false,
+        "allowFunctions": false,
+        "allowBind": false
+      }
+    ],
+    "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx", ".test.js", ".test.ts"] }],
+    "react/jsx-handler-names": [
+      1,
+      {
+        "eventHandlerPrefix": "handle",
+        "eventHandlerPropPrefix": "on",
+        "checkLocalVariables": true
+      }
+    ],
+    "react/jsx-pascal-case": 2,
+    "react/jsx-props-no-spreading": [
+      1,
+      {
+        "html": "enforce",
+        "custom": "enforce",
+        "explicitSpread": "enforce"
+      }
+    ],
+    "react/jsx-sort-props": [
+      2,
+      {
+        "callbacksLast": true,
+        "shorthandFirst": false,
+        "shorthandLast": true,
+        "ignoreCase": true,
+        "noSortAlphabetically": false,
+        "reservedFirst": true
+      }
+    ],
+    "react/state-in-constructor": [1, "never"],
+    "react/static-property-placement": [1, "static public field"],
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-use-before-define": 0
+  },
+  "overrides": [
+    {
+      "files": ["src/serviceWorker.ts"],
+      "rules": {
+        "no-console": 0,
+        "no-param-reassign": 0
+      }
+    }
+  ]
+}
