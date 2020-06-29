@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import './index.css';
 import * as serviceWorker from './serviceWorker';
+import * as tvshowsTheme from './themes/tvshows';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App theme={tvshowsTheme} />
   </React.StrictMode>,
   document.getElementById('root')
 );
