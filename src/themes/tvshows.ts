@@ -54,5 +54,5 @@ export const fonts = {
 
 export const breakpoints = {
   tabletAndHigher: '@media only screen and (min-width: 700px)',
-  desktopAndHigher: '@media only screen and (min-width: 1023px)',
+  desktopAndHigher: '@media only screen and (min-width: 1025px)',
 };
