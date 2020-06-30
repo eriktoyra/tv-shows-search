@@ -7,6 +7,7 @@ export async function API<T>(request: RequestInfo): Promise<APIResponse<T>> {
 
   try {
     response.data = await response.json();
+    // eslint-disable-next-line no-empty
   } catch (error) {}
 
   if (!response.ok) {
