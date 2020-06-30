@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Route, useRouteMatch } from 'react-router-dom';
-import { ShowDetails } from '.';
 import { API } from '../api-client';
 import { SearchResultsList, SearchResultsListItem } from '../components/SearchResults';
 import { useDebounce } from '../hooks';
 import { ISearchResult } from '../models';
 import styled from '../styled';
+import { ShowDetails } from './ShowDetails';
 
 export const Wrapper = styled.main(({ theme }) => ({
   margin: '110px 20px 60px 20px',
@@ -66,7 +66,7 @@ export const Shows: React.FC<{}> = () => {
 
         setSearchResults(response.data ?? []);
       } catch (error) {
-        // TODO: Show error message via context?
+        // eslint-disable-next-line no-console
         console.error('error', error);
       } finally {
         setIsLoading(false);
@@ -80,16 +80,22 @@ export const Shows: React.FC<{}> = () => {
     }
   }, [debouncedQuery]);
 
-  const handleSearchQueryChange = (e: React.FormEvent<HTMLInputElement>) => {
+  function handleSearchQueryChange(e: React.FormEvent<HTMLInputElement>) {
     setQuery(e.currentTarget.value);
-  };
+  }
 
   return (
     <>
-      <Route exact path={path}>
+      <Route exact={true} path={path}>
         <Wrapper>
           <h2>Search</h2>
-          <SearchField name="search" type="text" placeholder="Search TV shows" onChange={handleSearchQueryChange} />
+          <SearchField
+            name="search"
+            placeholder="Search TV shows"
+            type="text"
+            value={query}
+            onChange={handleSearchQueryChange}
+          />
           {isLoading ? (
             <FeedbackMessage>Loading results... please wait.</FeedbackMessage>
           ) : noResultsFound ? (

@@ -3,17 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { SearchResultsListItemMeta } from '.';
 import { ISearchResult } from '../../models';
 import styled from '../../styled';
-
-const ShowDetailsPoster = styled.img(({ theme }) => ({
-  border: `5px solid ${theme.colors.gray30}`,
-  boxSizing: 'border-box',
-  width: '25%',
-
-  [theme.breakpoints.tabletAndHigher]: {
-    borderWidth: 10,
-    width: '100%',
-  },
-}));
+import { ShowDetailsPoster } from '../ShowDetails';
 
 const ListItem = styled.li(({ theme }) => ({
   margin: '0 0 10px 0',
@@ -32,7 +22,7 @@ const ListItem = styled.li(({ theme }) => ({
   },
 
   [theme.breakpoints.desktopAndHigher]: {
-    width: 'calc(20% - 10px)',
+    width: 'calc(25% - 10px)',
     transition: 'transform.2s',
 
     ':hover': {
@@ -50,8 +40,8 @@ export const SearchResultsListItem: React.FC<ISearchResult> = ({ show }) => {
   }
 
   return (
-    <ListItem onClick={handleOnShowDetailsNavigation} data-show-id={id}>
-      {image ? <ShowDetailsPoster src={image?.medium ?? ''} alt={name} /> : null}
+    <ListItem data-show-id={id} onClick={handleOnShowDetailsNavigation}>
+      {image ? <ShowDetailsPoster alt={name} src={image?.medium ?? ''} /> : null}
       <SearchResultsListItemMeta show={show} />
     </ListItem>
   );
