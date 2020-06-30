@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { API } from '../api-client';
-import { Main } from '../components/Common';
+import { FeedbackMessage, Main } from '../components/Common';
 import { ShowDetailsMeta, ShowDetailsPoster, ShowDetailsSummary } from '../components/ShowDetails';
 import { IShowDetails } from '../models';
 import styled from '../styled';
@@ -107,7 +107,9 @@ export const ShowDetails = () => {
           </ShowDetailsLayout>
         </>
       ) : (
-        <p>No show details to show...</p>
+        <FeedbackMessage>
+          No show found matching the id. Try <Link to="/shows">searching for it</Link> instead.
+        </FeedbackMessage>
       )}
     </Main>
   );

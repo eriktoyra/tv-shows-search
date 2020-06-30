@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, useRouteMatch } from 'react-router-dom';
 import { API } from '../api-client';
+import { FeedbackMessage } from '../components/Common';
 import { SearchResultsList, SearchResultsListItem } from '../components/SearchResults';
 import { useDebounce } from '../hooks';
 import { ISearchResult } from '../models';
@@ -14,16 +15,6 @@ export const Wrapper = styled.main(({ theme }) => ({
     margin: '120px auto 60px auto',
     width: '70%',
   },
-}));
-
-export const FeedbackMessage = styled.div(({ theme }) => ({
-  borderLeft: `10px solid ${theme.colors.tertiary}`,
-  backgroundColor: theme.colors.gray10,
-  color: theme.colors.secondary,
-  padding: 10,
-  margin: '20px 0',
-
-  [theme.breakpoints.tabletAndHigher]: {},
 }));
 
 export const SearchField = styled.input(({ theme }) => ({
