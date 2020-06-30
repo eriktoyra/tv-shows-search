@@ -7,12 +7,21 @@ import { useDebounce } from '../hooks';
 import { ISearchResult } from '../models';
 import styled from '../styled';
 
-export const LoadingResults = styled.div(({ theme }) => ({
-  borderLeft: `10px solid ${theme.colors.secondary}`,
+export const Wrapper = styled.main(({ theme }) => ({
+  margin: '110px 20px 60px 20px',
+
+  [theme.breakpoints.desktopAndHigher]: {
+    margin: '120px auto 60px auto',
+    width: '70%',
+  },
+}));
+
+export const FeedbackMessage = styled.div(({ theme }) => ({
+  borderLeft: `10px solid ${theme.colors.tertiary}`,
   backgroundColor: theme.colors.gray10,
   color: theme.colors.secondary,
   padding: 10,
-  margin: 20,
+  margin: '20px 0',
 
   [theme.breakpoints.tabletAndHigher]: {},
 }));
@@ -23,8 +32,8 @@ export const SearchField = styled.input(({ theme }) => ({
   borderRadius: 25,
   color: theme.colors.primary,
   padding: 10,
-  margin: '60px 20px 0 20px',
-  width: 'calc(100% - 40px)',
+  margin: '20px 0',
+  width: '100%',
   boxSizing: 'border-box',
   font: theme.fonts.mobile.xl,
 
@@ -45,6 +54,7 @@ export const Shows: React.FC<{}> = () => {
   const debouncedQuery = useDebounce(query, 400);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState<ISearchResult[]>([]);
+  const noResultsFound = searchResults.length === 0 && query.length > 0;
 
   useEffect(() => {
     async function fetchShowDetails() {
@@ -77,17 +87,21 @@ export const Shows: React.FC<{}> = () => {
   return (
     <>
       <Route exact path={path}>
-        <h1>Search</h1>
-        <SearchField name="search" type="text" placeholder="Search TV shows" onChange={handleSearchQueryChange} />
-        {isLoading ? (
-          <LoadingResults>Loading results... please wait.</LoadingResults>
-        ) : (
-          <SearchResultsList>
-            {searchResults.map(searchResult => (
-              <SearchResultsListItem key={`show-${searchResult.show.id}`} show={searchResult.show} />
-            ))}
-          </SearchResultsList>
-        )}
+        <Wrapper>
+          <h2>Search</h2>
+          <SearchField name="search" type="text" placeholder="Search TV shows" onChange={handleSearchQueryChange} />
+          {isLoading ? (
+            <FeedbackMessage>Loading results... please wait.</FeedbackMessage>
+          ) : noResultsFound ? (
+            <FeedbackMessage>No results. Try another search.</FeedbackMessage>
+          ) : (
+            <SearchResultsList>
+              {searchResults.map(searchResult => (
+                <SearchResultsListItem key={`show-${searchResult.show.id}`} show={searchResult.show} />
+              ))}
+            </SearchResultsList>
+          )}
+        </Wrapper>
       </Route>
       <Route path={`${path}/:showId`}>
         <ShowDetails />
