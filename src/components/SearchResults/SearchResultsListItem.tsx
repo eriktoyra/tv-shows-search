@@ -1,9 +1,9 @@
 import React, { MouseEvent } from 'react';
 import { useHistory } from 'react-router-dom';
-import { SearchResultsListItemMeta } from '.';
 import { ISearchResult } from '../../models';
 import styled from '../../styled';
 import { ShowDetailsPoster } from '../ShowDetails';
+import { SearchResultsListItemMeta } from './SearchResultsListItemMeta';
 
 const ListItem = styled.li(({ theme }) => ({
   margin: '0 0 10px 0',
