@@ -2,6 +2,7 @@ import { Global } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
 import React from 'react';
 import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { Shows } from './screens';
 import styled from './styled';
 import { Theme } from './themes';
@@ -60,7 +61,9 @@ const App: React.FC<IApp> = ({ theme }) => {
           </AppHeader>
           <Switch>
             <Route path="/shows">
-              <Shows />
+              <ErrorBoundary>
+                <Shows />
+              </ErrorBoundary>
             </Route>
             <Route path="/">
               <Redirect to="/shows" />

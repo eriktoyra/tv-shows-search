@@ -2,8 +2,8 @@ interface APIResponse<T> extends Response {
   data?: T;
 }
 
-export async function API<T>(request: RequestInfo): Promise<APIResponse<T>> {
-  const response: APIResponse<T> = await fetch(request);
+export async function API<T>(request: RequestInfo, abortController: AbortController): Promise<APIResponse<T>> {
+  const response: APIResponse<T> = await fetch(request, { signal: abortController.signal });
 
   try {
     response.data = await response.json();

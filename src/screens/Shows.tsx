@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Route, useRouteMatch } from 'react-router-dom';
 import { API } from '../api-client';
 import { FeedbackMessage } from '../components/Common';
+import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
 import { SearchResultsList, SearchResultsListItem } from '../components/SearchResults';
 import { useDebounce } from '../hooks';
 import { ISearchResult } from '../models';
@@ -48,11 +49,14 @@ export const Shows: React.FC<{}> = () => {
   const noResultsFound = searchResults.length === 0 && query.length > 0;
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     async function fetchShowDetails() {
       try {
         setIsLoading(true);
         const response = await API<ISearchResult[]>(
-          new Request(`http://api.tvmaze.com/search/shows?q=${debouncedQuery}`)
+          new Request(`http://api.tvmaze.com/search/shows?q=${debouncedQuery}`),
+          abortController
         );
 
         setSearchResults(response.data ?? []);
@@ -69,6 +73,10 @@ export const Shows: React.FC<{}> = () => {
     } else {
       setSearchResults([]);
     }
+
+    return () => {
+      abortController.abort();
+    };
   }, [debouncedQuery]);
 
   function handleSearchQueryChange(e: React.FormEvent<HTMLInputElement>) {
@@ -101,7 +109,9 @@ export const Shows: React.FC<{}> = () => {
         </Wrapper>
       </Route>
       <Route path={`${path}/:showId`}>
-        <ShowDetails />
+        <ErrorBoundary>
+          <ShowDetails />
+        </ErrorBoundary>
       </Route>
     </>
   );

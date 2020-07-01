@@ -75,18 +75,25 @@ export const ShowDetails = () => {
   const [showDetails, setShowDetails] = useState<IShowDetails>();
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     async function fetchShowDetails() {
       try {
-        const response = await API<IShowDetails>(new Request(`http://api.tvmaze.com/shows/${showId}`));
+        const response = await API<IShowDetails>(new Request(`http://api.tvmaze.com/shows/${showId}`), abortController);
 
         setShowDetails(response.data);
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('error', error);
+        if (!abortController.signal.aborted) {
+          // eslint-disable-next-line no-console
+          console.error('error', error);
+        }
       }
     }
-
     fetchShowDetails();
+
+    return () => {
+      abortController.abort();
+    };
   }, [showId]);
 
   return (
