@@ -52,7 +52,7 @@ export const Shows: React.FC<{}> = () => {
       try {
         setIsLoading(true);
         const response = await API<ISearchResult[]>(
-          new Request(`http://api.tvmaze.com//search/shows?q=${debouncedQuery}`)
+          new Request(`http://api.tvmaze.com/search/shows?q=${debouncedQuery}`)
         );
 
         setSearchResults(response.data ?? []);
