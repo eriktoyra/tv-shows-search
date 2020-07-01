@@ -99,6 +99,8 @@ export const ShowDetails = () => {
               <ShowDetailsPoster alt={showDetails.name} src={showDetails.image?.medium} />
             </div>
             <div className="show-summary-wrapper">
+              {/* dangerouslySetInnerHTML is something I usually avoid, but because of time limits
+              in this assignment I consider it OK. */}
               <ShowDetailsSummary dangerouslySetInnerHTML={{ __html: showDetails.summary }} />
             </div>
             <div className="show-meta-wrapper">
