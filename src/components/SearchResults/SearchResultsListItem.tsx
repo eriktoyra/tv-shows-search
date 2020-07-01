@@ -1,5 +1,5 @@
-import React, { MouseEvent } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { ISearchResult } from '../../models';
 import styled from '../../styled';
 import { ShowDetailsPoster } from '../ShowDetails';
@@ -33,16 +33,13 @@ const ListItem = styled.li(({ theme }) => ({
 
 export const SearchResultsListItem: React.FC<ISearchResult> = ({ show }) => {
   const { id, image, name } = show;
-  const history = useHistory();
-
-  function handleOnShowDetailsNavigation(e: MouseEvent<HTMLLIElement>) {
-    history.push(`/shows/${e.currentTarget.dataset.showId}`);
-  }
 
   return (
-    <ListItem data-show-id={id} onClick={handleOnShowDetailsNavigation}>
-      {image ? <ShowDetailsPoster alt={name} src={image?.medium ?? ''} /> : null}
-      <SearchResultsListItemMeta show={show} />
+    <ListItem>
+      <Link to={`/shows/${id}`}>
+        {image ? <ShowDetailsPoster alt={name} src={image?.medium ?? ''} /> : null}
+        <SearchResultsListItemMeta show={show} />
+      </Link>
     </ListItem>
   );
 };
